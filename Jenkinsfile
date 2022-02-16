@@ -44,7 +44,8 @@ pipeline {
                 sh """
                     cd ${env.WORKSPACE}
                     ls -lrt
-
+                    chmod +x deploy.sh
+                    release_name=${app_name} appname=${app_name} dockertag=${DOCKER_TAG}
 
                 """
 
