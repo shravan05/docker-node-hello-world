@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
       DOCKER_TAG = getDockerTag()
+      app_name = nodejs
     }
     stages {
         stage('Code Build') {
@@ -23,6 +24,28 @@ pipeline {
 	             	docker push 926188890095.dkr.ecr.us-east-1.amazonaws.com/nodejs-app:${DOCKER_TAG}
 
                  """
+
+            }
+        }
+
+        stage('Checkout Helm Charts') {
+            steps {
+
+            checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [],
+            gitTool: 'GIT-Linux', submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'jenkins-eks',
+            url: 'https://github.com/shravan05/helm-eg.git']]])
+
+            }
+        }
+
+        stage('Deploy Helm Charts') {
+            steps {
+
+                sh """
+                    ls -lrt
+
+
+                """
 
             }
         }
