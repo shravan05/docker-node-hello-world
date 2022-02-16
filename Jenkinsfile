@@ -42,6 +42,7 @@ pipeline {
             steps {
 
                 sh """
+                    cd ${env.WORKSPACE}
                     ls -lrt
 
 
