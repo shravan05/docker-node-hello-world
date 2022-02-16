@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
       DOCKER_TAG = getDockerTag()
-      app_name = nodejs
+      app_name = "nodejs"
     }
     stages {
         stage('Code Build') {
